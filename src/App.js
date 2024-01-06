@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
-function App() {
+import Header from './includes/Header.includes';
+import Search from './component/search-component/Search.component';
+import Card from './component/card-component/Card.component';
+
+
+
+
+const App = () => {
+  const [propertyData, setPropertyData] = useState([]);
+  const [searchString, setSearchString] = useState('');
+  const onPropertyChange = (event) => {
+    const searchString = event.target.value.toLocaleLowerCase();
+    setSearchString(searchString);
+
+  }
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((response) => response.json())
+      .then((property) => setPropertyData(property));
+
+  }, []);
+
+  const filterPropertyArray = propertyData.filter((property) => {
+    return property.name.toLocaleLowerCase().includes(searchString);
+  });
+
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Search className='property_search' placeholder='Search Property' onChangeHandler={onPropertyChange} />
+      <Card properties={filterPropertyArray} />
+      
     </div>
   );
 }

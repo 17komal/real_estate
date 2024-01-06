@@ -1,0 +1,30 @@
+.NavStyle{
+   background-color: #2d3840;
+}
+
+.App-logo {
+    height: 30px;
+   
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .nav1name{
+    color: #FFF;
+  }
+  .nav2name{
+    color: #61BDFD;
+  }
+  
+  
